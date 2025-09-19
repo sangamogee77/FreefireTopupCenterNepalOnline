@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Topup Online</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>Free Fire Topup</h1>
+        <button class="hamburger" id="hamburger-btn">☰</button>
+    </header>
+
+    <nav class="side-menu" id="side-menu">
+        <a href="#" class="nav-link" data-view="new-topup-view">New Topup</a>
+        <a href="#" class="nav-link" data-view="offers-view">Offers</a>
+        <a href="#" class="nav-link" data-view="admin-videos-view">Admin Videos</a>
+        <a href="#" class="nav-link" data-view="my-orders-view">My Orders</a>
+        <a href="#" class="nav-link" data-view="my-profile-view">My Profile</a>
+        <a href="#" class="nav-link" data-view="support-view">Support</a>
+    </nav>
+
+    <main>
+        <!-- View for Categories & Packages -->
+        <div id="new-topup-view" class="view active">
+            <div class="container" id="selection-container">
+                <h2 style="text-align:center;">Select a Category</h2>
+                <p id="loading-msg">Loading...</p>
+                <div class="grid" id="categories-grid"></div>
+            </div>
+        </div>
+
+        <!-- View for the Topup Form -->
+        <div id="topup-form-view" class="view">
+            <div class="container">
+                <h2>Complete Your Order</h2>
+                <form id="topup-form" class="form-container">
+                    <div class="input-group">
+                        <label>Player ID</label>
+                        <input type="text" id="user-player-id" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Selected Package</label>
+                        <input type="text" id="package-select" readonly required>
+                    </div>
+                    <div class="input-group">
+                        <label for="payment-method">Payment Method</label>
+                        <select id="payment-method" required>
+                            <option value="" disabled selected>Select Payment</option>
+                            <option value="Esewa">Esewa</option>
+                            <option value="Khalti">Khalti</option>
+                            <option value="IME Pay">IME Pay</option>
+                            <option value="Bank">Bank</option>
+                        </select>
+                    </div>
+                    <img id="payment-qr-code" src="" alt="QR Code" class="hidden">
+                    <button type="button" id="download-qr-btn" class="btn hidden">Download QR</button>
+                    <div id="payment-fields-container" class="hidden">
+                        <div id="bank-name-group" class="input-group hidden">
+                            <label>Bank Name</label>
+                            <input type="text" id="bank-name">
+                        </div>
+                        <div class="input-group">
+                            <label>Payment Remark (Your Name)</label>
+                            <input type="text" id="payment-remark" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Transaction ID</label>
+                            <input type="text" id="transaction-id" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Submit Order</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Order Success View -->
+        <div id="order-success-view" class="view">
+            <div class="container" style="text-align: center;">
+                <div id="success-icon">✅</div>
+                <h2>Order Successful!</h2>
+                <p style="margin: 1rem 0 2rem 0;">Please wait 3 to 10 minutes for processing.</p>
+                <button id="back-to-home-btn" class="btn">Back to Home</button>
+            </div>
+        </div>
+
+        <!-- Profile Prompt View -->
+        <div id="profile-prompt-view" class="view">
+            <div class="container" style="text-align: center;">
+                <h2>Profile Required</h2>
+                <p style="margin: 1rem 0 2rem 0;">Please create your profile first to place an order.</p>
+                <button id="go-to-profile-btn" class="btn">Go to My Profile</button>
+            </div>
+        </div>
+
+        <!-- Admin Videos View -->
+        <div id="admin-videos-view" class="view">
+            <div class="container">
+                <h2>Admin Videos</h2>
+                <div id="promo-videos-list-user" class="video-list form-container"></div>
+            </div>
+        </div>
+
+        <!-- My Orders View -->
+        <div id="my-orders-view" class="view">
+            <div class="container">
+                <h2>My Orders</h2>
+                <div id="my-orders-list"></div>
+            </div>
+        </div>
+
+        <!-- My Profile View -->
+        <div id="my-profile-view" class="view">
+            <div class="container">
+                <h2>My Profile</h2>
+                <form id="profile-form" class="form-container">
+                    <input type="text" id="profile-name" placeholder="Name" required>
+                    <input type="email" id="profile-email" placeholder="Email" required>
+                    <input type="text" id="profile-player-id" placeholder="Player ID" required>
+                    <button type="submit" class="btn">Save Profile</button>
+                    <p id="profile-save-message"></p>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Offers View -->
+        <div id="offers-view" class="view">
+            <div class="container">
+                <div id="offer-banner" class="hidden">
+                    <h2 id="offer-banner-title"></h2>
+                    <img id="offer-banner-img" src="" alt="Special Offer">
+                </div>
+                <div id="countdown-display" class="hidden">
+                    <h3 id="countdown-title"></h3>
+                    <p id="countdown-timer"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support View -->
+        <div id="support-view" class="view">
+            <div class="container" style="text-align: center;">
+                <h2>Support</h2>
+                <p style="margin: 1rem 0 2rem 0;">For issues, contact us on WhatsApp.</p>
+                <a id="whatsapp-support-link" href="#" target="_blank" class="btn">Contact on WhatsApp</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
